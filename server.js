@@ -73,14 +73,12 @@ app.get('/', async (req, res) => {
 
 app.get('/questionPaper', async (req, res) => {
     req.session.selection = "qp";
-    console.log(req.session)
     const dbList = await getDBNames(req.session.selection);
     res.render('questionPaper', { dbList });
 })
 
 app.get('/syllabus', async (req, res) => {
     req.session.selection = "syllabus"
-    console.log(req.session)
     const dbList = await getDBNames(req.session.selection);
     res.render('syllabus', { dbList });
 })
@@ -125,22 +123,21 @@ app.post('/filter1', async (req, res) => {
 })
 
 app.post('/filter2', async (req, res) => {
-    const databaseName = req.body.data1;
-    const collectionName = req.body.data2;
-    const data = await getData(databaseName, collectionName, req.session.selection);
+    req.session.dbName = req.body.data1;
+    req.session.colName = req.body.data2;
+    const data = await getData(req.session.dbName, req.session.colName, req.session.selection);
     res.send(data);
     // console.log(data);
 })
 
 app.post('/filter3', async (req, res) => {
 
-    app.locals.databaseName = req.body.data1;
-    app.locals.collectionName = req.body.data2;
+    //req.session.dbName & req.session.colName
     req.session.dataName = req.body.data3;
 
-    await downloadPDF(app.locals.databaseName, app.locals.collectionName, req.session.dataName, req.session.selection);
+    await downloadPDF(req.session.dbName, req.session.colName, req.session.dataName, req.session.selection);
 
-    res.send("Goa")
+    res.send(req.hostname)
     // res.redirect('/test');
 })
 
@@ -171,22 +168,22 @@ app.get('/download', (req, res) => {
 
 // Uploading PDF
 app.post('/filter4', async (req, res) => {
-    app.locals.databaseName = req.body.filterUP;
-    const colList = await getColNames(app.locals.databaseName, app.locals.selection);
+    req.session.dbName = req.body.filterUP;
+    const colList = await getColNames(req.session.dbName, req.session.selection);
     res.send(colList);
 })
 
 app.post('/filter5', async (req, res) => {
-    app.locals.collectionName = req.body.filterUP;
+    req.session.colName = req.body.filterUP;
     res.send("awesome");
 })
 
 app.post('/filter6', upload.single('pdf'), async (req, res) => {
-    const databaseName = app.locals.databaseName;
-    const pdfName = req.body.pdfName;
-    const pdfFilePath = req.file.path;
+    // req.session.dbName && req.session.colName
+    req.session.pdfName = req.body.pdfName;
+    req.session.pdfFilePath = req.file.path;
 
-    await uploadPDF(databaseName, app.locals.collectionName, pdfName, pdfFilePath, app.locals.selection);
+    await uploadPDF(req.session.dbName, req.session.colName, req.session.pdfName, req.session.pdfFilePath, req.session.selection);
 
     uploadFolderPath = "./uploads"
 
@@ -214,10 +211,8 @@ app.post('/filter6', upload.single('pdf'), async (req, res) => {
 
 // Preview PDF
 app.get('/preview', async (req, res) => {
-    var databaseName = app.locals.databaseName
-    var collectionName = app.locals.collectionName
-    var dataName = app.locals.dataName
-    await previewPDF(databaseName, collectionName, dataName, res, app.locals.selection);
+    // req.session.dbName && req.session.colName && req.session.dataName
+    await previewPDF(req.session.dbName, req.session.colName, req.session.dataName, res, req.session.selection);
 })
 
 const PORT = process.env.PORT || 3000;

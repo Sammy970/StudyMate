@@ -40,6 +40,7 @@ async function previewPDF(databaseName, collectionName, dataName, res, selection
     }
     catch (err) {
         console.log("Error at previewPDF");
+        console.log(err);
     }
     finally {
         if (selection == "qp") {

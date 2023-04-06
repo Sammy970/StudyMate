@@ -162,6 +162,8 @@
 
                 $.post(url, data, function (response) {
                     // console.log(response);
+                    previewURL = "http://" + response + ":3000/preview"
+                    console.log(previewURL);
                     $("#pdfDownload").empty();
                     $("#pdfPreview").empty();
                     $("#pdfDownload").append(
@@ -173,7 +175,7 @@
 
                     $("#previewFrame").empty();
                     $("#previewFrame").append(
-                        '<iframe class="embed-responsive-item" src="http://localhost:3000/preview?" frameborder="0" width="1200px" height="650px"></iframe>'
+                        '<iframe class="embed-responsive-item" src="' + previewURL + '"' + ' frameborder="0" width="1200px" height="650px"></iframe>'
                     );
 
                 })
