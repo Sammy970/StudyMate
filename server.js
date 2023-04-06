@@ -80,6 +80,7 @@ app.get('/questionPaper', async (req, res) => {
 
 app.get('/syllabus', async (req, res) => {
     req.session.selection = "syllabus"
+    console.log(req.session)
     const dbList = await getDBNames(req.session.selection);
     res.render('syllabus', { dbList });
 })
@@ -119,7 +120,7 @@ app.post('/logout', async (req, res) => {
 // Downloading PDF
 app.post('/filter1', async (req, res) => {
     const formdata = req.body.filter;
-    const colList = await getColNames(formdata, app.locals.selection);
+    const colList = await getColNames(formdata, req.session.selection);
     res.send(colList);
 })
 
@@ -127,7 +128,7 @@ app.post('/filter2', async (req, res) => {
     const databaseName = req.body.data1;
     const collectionName = req.body.data2;
 
-    const data = await getData(databaseName, collectionName, app.locals.selection);
+    const data = await getData(databaseName, collectionName, req.session.selection);
     res.send(data);
     // console.log(data);
 })
@@ -138,7 +139,7 @@ app.post('/filter3', async (req, res) => {
     app.locals.collectionName = req.body.data2;
     app.locals.dataName = req.body.data3;
 
-    await downloadPDF(app.locals.databaseName, app.locals.collectionName, app.locals.dataName, app.locals.selection);
+    await downloadPDF(app.locals.databaseName, app.locals.collectionName, app.locals.dataName, req.session.selection);
 
     res.send("Goa")
     // res.redirect('/test');
