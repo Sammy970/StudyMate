@@ -72,22 +72,22 @@ app.get('/', async (req, res) => {
 
 
 app.get('/questionPaper', async (req, res) => {
-    req.session.selection = "qp";
+    req.session.qp = "qp";
     console.log(req.session)
-    const dbList = await getDBNames(req.session.selection);
+    const dbList = await getDBNames(req.session.qp);
     res.render('questionPaper', { dbList });
 })
 
 app.get('/syllabus', async (req, res) => {
-    req.session.selection = "syllabus"
+    req.session.syllabus = "syllabus"
     console.log(req.session)
-    const dbList = await getDBNames(req.session.selection);
+    const dbList = await getDBNames(req.session.syllabus);
     res.render('syllabus', { dbList });
 })
 
 app.get('/notes', async (req, res) => {
-    req.session.selection = "notes"
-    const dbList = await getDBNames(req.session.selection);
+    req.session.notes = "notes"
+    const dbList = await getDBNames(req.session.notes);
     res.render('notes', { dbList });
 })
 
@@ -127,7 +127,6 @@ app.post('/filter1', async (req, res) => {
 app.post('/filter2', async (req, res) => {
     const databaseName = req.body.data1;
     const collectionName = req.body.data2;
-
     const data = await getData(databaseName, collectionName, req.session.selection);
     res.send(data);
     // console.log(data);
