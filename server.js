@@ -113,7 +113,7 @@ app.post('/loginCred', async (req, res) => {
 })
 
 app.post('/logout', async (req, res) => {
-    app.locals.loginState = "false"
+    req.session.loginState = "false"
     res.redirect('/admin');
 })
 
