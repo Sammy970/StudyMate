@@ -2,8 +2,7 @@ const { MongoClient, Binary } = require('mongodb')
 
 const uriLogin = "mongodb+srv://samyakTest:samyakTest@testcluster.eqeij01.mongodb.net/test"
 const uriQuestionPaper = "mongodb+srv://samyak970:samyak970@dbms.krybkqj.mongodb.net/test"
-// const uriSyllabus = "mongodb+srv://samyak970:samyak970@syllabus.wq1luon.mongodb.net/test"
-const uriSyllabus = "mongodb+srv://samyak970:samyak970@syllabus.wq1luon.mongodb.net/test"
+const uriSyllabus = "mongodb+srv://samyak970:samyak970@syllabus.vdys3eu.mongodb.net/test"
 const uriNotes = "mongodb+srv://samyak970:samyak970@notes.jymuq4j.mongodb.net/test"
 
 const clientQuestionPaper = new MongoClient(uriQuestionPaper)

@@ -35,7 +35,7 @@ async function checkCred(username, password, res) {
         const pass = find.pass;
         if (pass == password) {
             console.log("Correct Password")
-            app.locals.loginState = "true";
+            req.session.loginState = "true";
             res.send("loginTrue");
         } else {
             res.send("loginFalse");
@@ -72,29 +72,29 @@ app.get('/', async (req, res) => {
 
 
 app.get('/questionPaper', async (req, res) => {
-    req.session.qp = "qp";
+    req.session.selection = "qp";
     console.log(req.session)
-    const dbList = await getDBNames(req.session.qp);
+    const dbList = await getDBNames(req.session.selection);
     res.render('questionPaper', { dbList });
 })
 
-app.post('/syllabus', async (req, res) => {
-    req.session.syllabus = "syllabus"
+app.get('/syllabus', async (req, res) => {
+    req.session.selection = "syllabus"
     console.log(req.session)
-    const dbList = await getDBNames(req.session.syllabus);
+    const dbList = await getDBNames(req.session.selection);
     res.render('syllabus', { dbList });
 })
 
 app.get('/notes', async (req, res) => {
-    req.session.notes = "notes"
-    const dbList = await getDBNames(req.session.notes);
+    req.session.selection = "notes"
+    const dbList = await getDBNames(req.session.selection);
     res.render('notes', { dbList });
 })
 
 app.get('/admin', async (req, res) => {
-    if (app.locals.loginState == "true") {
-        const dbList = await getDBNames(app.locals.selection);
-        var selection = app.locals.selection
+    if (req.session.loginState == "true") {
+        const dbList = await getDBNames(req.session.selection);
+        var selection = req.session.selection
         res.render('admin', { dbList, selection });
     } else {
         res.render('adminLogin');
@@ -108,7 +108,7 @@ app.get('/login', async (req, res) => {
 app.post('/loginCred', async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    app.locals.selection = req.body.section;
+    req.session.selection = req.body.section;
     checkCred(username, password, res);
 })
 
