@@ -24,7 +24,7 @@ const client = new MongoClient(uriQuestionPaper)
 const clientLogin = new MongoClient(uriLogin)
 const upload = multer({ dest: 'uploads/' });
 
-async function checkCred(username, password, res) {
+async function checkCred(username, password, req, res) {
     await clientLogin.connect();
     const database = clientLogin.db("Creds")
     const collection = database.collection("Login");
@@ -109,7 +109,7 @@ app.post('/loginCred', async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     req.session.selection = req.body.section;
-    checkCred(username, password, res);
+    checkCred(username, password, req, res);
 })
 
 app.post('/logout', async (req, res) => {
