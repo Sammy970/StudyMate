@@ -78,7 +78,7 @@ app.get('/questionPaper', async (req, res) => {
     res.render('questionPaper', { dbList });
 })
 
-app.get('/syllabus', async (req, res) => {
+app.post('/syllabus', async (req, res) => {
     req.session.syllabus = "syllabus"
     console.log(req.session)
     const dbList = await getDBNames(req.session.syllabus);
