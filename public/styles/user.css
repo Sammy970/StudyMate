@@ -1,0 +1,130 @@
+body {
+    background-color: #eeeded !important;
+}
+
+/* CSS for the header */
+
+.qpHeader-text {
+    background-color: #63E6BE;
+    color: #242423;
+    padding: 1rem;
+    text-align: center;
+}
+
+.syllabusHeader-text {
+    background-color: #74C0FC;
+    color: #242423;
+    padding: 1rem;
+    text-align: center;
+}
+
+.notesHeader-text {
+    background-color: #E599F7;
+    color: #242423;
+    padding: 1rem;
+    text-align: center;
+}
+
+
+h2 {
+    font-size: large;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+}
+
+/* CSS for the form inputs */
+form {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+select {
+    width: 100%;
+    max-width: 20rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    background-color: #fff;
+}
+
+button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 3rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+.submit1 {
+    background-color: #FFC0C7 !important;
+    color: #282A35;
+    /* border-color: black; */
+    border-radius: 1rem;
+    transition: 0.6s;
+    font-weight: 500;
+}
+
+
+.submit2 {
+    background-color: #fce84e !important;
+    color: #282A35;
+    border-radius: 1rem;
+    transition: 0.6s;
+    font-weight: 500;
+}
+
+
+.submit3 {
+    background-color: #04AA6D !important;
+    color: #282A35;
+    border-radius: 1rem;
+    transition: 0.6s;
+    font-weight: 500;
+}
+
+.submit1:hover,
+.submit2:hover,
+.submit3:hover,
+.downloadBTN:hover,
+.previewBTN:hover {
+    border-color: black;
+    box-shadow: 5px 5px rgb(49, 48, 48);
+    transform: scale(1.2);
+    transition: 0.6s;
+}
+
+.form1,
+.form2,
+.form3 {
+    transition: 0.6s;
+}
+
+.form1:hover,
+.form2:hover,
+.form3:hover {
+    border-color: black;
+    padding: 20px;
+    transition: 0.6s;
+}
+
+.previewBTN,
+.downloadBTN {
+    color: white;
+    background-color: #712cf9;
+    transition: 0.6s;
+}
+
+.homeBtn {
+    margin-top: -20px;
+}

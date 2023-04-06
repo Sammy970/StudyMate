@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+
+
+    <!-- import jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#sectionForm").submit(function (event) {
+                event.preventDefault();
+                const form = $(this);
+                const url = form.attr('action');
+                const selection = $("#section").val();
+                const data = {
+                    "selection": selection
+                }
+
+                $.post(url, data, function (response) {
+                    console.log(response);
+                })
+
+            })
+        })
+
+    </script>
+</body>
+
+</html>

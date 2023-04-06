@@ -1,0 +1,136 @@
+body {
+    overflow: hidden;
+    /* Hide scrollbars */
+    background-attachment: fixed;
+    background: url("https://images.unsplash.com/photo-1538641351053-b85bffeb9b7e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80") no-repeat;
+    background-size: cover;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, .15);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    padding: 30px;
+}
+
+img {
+    height: 80%;
+    width: 80%;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: 0.6s;
+    margin-top: -40px;
+}
+
+img:hover {
+    transition: 0.6s;
+    transform: scale(1.1);
+}
+
+.header {
+    margin-bottom: 2rem;
+    color: #FFF;
+}
+
+/* Style for the form label */
+#loginForm label {
+    display: block;
+    letter-spacing: 1px;
+    padding-top: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* Style for the login form button */
+#loginForm button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #2A7816;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Style for the button div */
+#button {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+
+label {
+    display: block;
+    letter-spacing: 4px;
+    padding-top: 30px;
+    text-align: center;
+    color: #FFF;
+}
+
+/* animation for the label text to return to normal after 
+user clicks away from the input box */
+label .label-text {
+    color: #FFF;
+    cursor: text;
+    font-size: 15px;
+    line-height: 20px;
+    text-transform: uppercase;
+    -moz-transform: translateY(-34px);
+    -ms-transform: translateY(-34px);
+    -webkit-transform: translateY(-34px);
+    transform: translateY(-34px);
+    transition: all 0.3s;
+}
+
+/* animation for the text to float up and turn white */
+label input:focus+.label-text {
+    color: #FFF;
+    font-size: 13px;
+    margin-top: 5px;
+    -moz-transform: translateY(-74px);
+    -ms-transform: translateY(-74px);
+    -webkit-transform: translateY(-74px);
+    transform: translateY(-74px);
+}
+
+/* remove the input box styling */
+label input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid #2A7816;
+    color: white;
+    font-size: 20px;
+    letter-spacing: 1px;
+    outline: 0;
+    padding: 5px 20px;
+    text-align: center;
+    transition: all 0.3s;
+    width: 200px;
+    border-radius: 0.5rem;
+}
+
+/* once you click in the input the input width box animates */
+label input:focus {
+    max-width: 100%;
+    width: 400px;
+}
+
+/* the text floats up during form validation */
+label input:valid+.label-text {
+    font-size: 13px;
+    -moz-transform: translateY(-74px);
+    -ms-transform: translateY(-74px);
+    -webkit-transform: translateY(-74px);
+    transform: translateY(-74px);
+}
+
+.section-container {
+    margin-top: -20px;
+}

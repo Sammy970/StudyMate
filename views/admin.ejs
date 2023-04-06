@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page to upload PDF</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/styles/admin.css">
+
+</head>
+
+<body>
+
+    <div class="container mt-5 mb-5">
+
+        <div class="homeBtn">
+            <a href="/"><i class="fa-solid fa-house-chimney fa-2xl" style="color: #2A7816;"></i></a>
+        </div>
+
+        <br>
+
+        <h2 class="mb-4 header-text">Admin Page to upload PDF to section "<span class="selection">
+                <%= selection %>
+            </span>"</h2>
+
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <h3>1. Select Year</h3>
+                <form id="myform4" action="/filter4" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="filterUP"></label>
+                        <select class="form-control" name="filterUP" id="filterUP">
+                            <% dbList.forEach(function(name) { %>
+                                <option value="<%= name %>">
+                                    <%= name %>
+                                </option>
+                                <% }); %>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h3>2. Select Branch</h3>
+                <form id="myform5" action="/filter5" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="filterUP"></label>
+                        <select class="form-control" name="filterUP" id="filterUP" required></select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                </form>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col">
+                <form id="myform6" action="/filter6" method="POST" enctype="multipart/form-data">
+
+                </form>
+
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col">
+                <form id="logoutForm" action="/logout" method="POST" enctype="multipart/form-data">
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- import jQuery -->
+    <script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+    <script>
+        $(document).ready(function () {
+
+            $("#sectionForm").submit(function (event) {
+                event.preventDefault();
+                const form = $(this);
+                const url = form.attr('action');
+                const selection = $("#section").val();
+                const data = {
+                    "selection": selection
+                }
+
+                $.post(url, data, function (response) {
+                    console.log(response);
+                })
+
+            })
+
+            $('#myform4').submit(function (event) {
+                event.preventDefault();
+                const form = $(this);
+                const url = form.attr('action');
+                const data = form.serialize();
+                // console.log(url);
+                $.post(url, data, function (response) {
+                    // console.log(response);
+                    $("#myform5 select").empty();
+                    response.forEach(function (name) {
+                        $("#myform5 select").append(
+                            '<option value="' + name + '">' + name + '</option>'
+                        )
+                    })
+                });
+            })
+
+
+            $('#myform5').submit(function (event) {
+                event.preventDefault();
+                const form = $(this);
+                const url = form.attr('action');
+                const data = form.serialize();
+                // console.log(url);
+                $.post(url, data, function (response) {
+                    // console.log(response);
+                    $("#myform6").empty();
+                    $("#myform6").append(
+                        '<div class="form-group"> <label for="pdfName">Add PDF as</label><input type="text" class="form-control" name="pdfName" id="pdfName" required></div>',
+                        '<div class= "form-group"><label for="file">Choose PDF</label><input type="file" class="form-control-file" name="pdf" required></div>',
+                        '<button type="submit" class="btn btn-primary">Submit</button>'
+                    )
+                });
+            })
+
+        })
+    </script>
+
+
+</body>
+
+</html>
