@@ -137,16 +137,16 @@ app.post('/filter3', async (req, res) => {
 
     app.locals.databaseName = req.body.data1;
     app.locals.collectionName = req.body.data2;
-    app.locals.dataName = req.body.data3;
+    req.session.dataName = req.body.data3;
 
-    await downloadPDF(app.locals.databaseName, app.locals.collectionName, app.locals.dataName, req.session.selection);
+    await downloadPDF(app.locals.databaseName, app.locals.collectionName, req.session.dataName, req.session.selection);
 
     res.send("Goa")
     // res.redirect('/test');
 })
 
 app.get('/download', (req, res) => {
-    var dataName = app.locals.dataName;
+    var dataName = req.session.dataName;
 
     const filePath = './downloadedPDF/' + dataName + '.pdf';
     const fileName = dataName + '.pdf';
