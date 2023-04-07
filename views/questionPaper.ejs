@@ -162,7 +162,7 @@
 
                 $.post(url, data, function (response) {
                     // console.log(response);
-                    previewURL = "http://" + response + ":3000/preview"
+                    previewURL = "https://" + response + "/preview"
                     console.log(previewURL);
                     $("#pdfDownload").empty();
                     $("#pdfPreview").empty();
